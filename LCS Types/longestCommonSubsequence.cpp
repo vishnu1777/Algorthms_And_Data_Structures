@@ -51,7 +51,7 @@ int getSequence(string &s1, string &s2)
         {
             if (s2[i - 1] == s1[j - 1])
             {
-                curr[j] = 1 + prev[j - 1];
+                curr[j] = 1 + prev[j - 1];  
             }
             else
             {

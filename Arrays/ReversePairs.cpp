@@ -52,6 +52,7 @@ int revPairs(vector<int>&nums,int low,int mid,int high)
     {   
         while(right <= high and nums[i] > 2*nums[right])right++;
         count+= right - middd;
+       
     }
     return count;
 }
