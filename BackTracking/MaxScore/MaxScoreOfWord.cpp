@@ -11,59 +11,35 @@ public:
             freq[c - 'a']++;
         }
     }
-    int findScore(vector<vector<string>> &ans, int score[])
-    {
-        int maxi = -1e9;
-        for (auto it : ans)
-        {
-            for (auto subset : it)
-            {
-                int sum = 0;
-                for (auto c : subset)
-                {
-                    sum += score[c - 'a'];
-                    maxi = max(maxi, sum);
-                }
-            }
-        }
-        return maxi;
-    }
-    void findMax(int idx, vector<string> &words, vector<string> temp, int n, vector<int> freq, int score[], int &maxi, vector<vector<string>> &ans)
-    {
-        ans.push_back(temp);
 
-        for (int i = idx; i < n; i++)
-        {
-            bool flag = true;
-            for (int j = 0; j < words[i].size(); j++)
-            {
+    int findMax(int idx, vector<string> &words,  int n, vector<int> freq, int score[])
+    {
+        if(idx == n)return 0;
 
-                if (freq[words[i][j]] == 0)
-                {
-                    flag = false;
-                    break;
-                }
-                freq[words[i][j] - 'a']--;
+        int notTake = findMax(idx+1,words,n,freq,score);
+        vector<int>temp(26);
+        bool flag = true;
+        int val = 0;
+        for(int i=0;i<words[idx].size();i++){
+            freq[words[idx][i]-'a']--;
+            if(freq[words[idx][i]-'a'] < 0){
+                flag = false;
+                break;
             }
-            if (flag)
-            {
-                temp.push_back(words[i]);
-                findMax(i + 1, words, temp, n, freq, score, maxi, ans);
-                temp.pop_back();
-            }
+            val+= score[words[idx][i]-'a'];
         }
+        int take = 0;
+        if(flag)take = val+ findMax(idx+1,words,n,freq,score);
+        return max(take,notTake);
     }
 
     int getScore(vector<string> &words, int n, string chars, int score[])
     {
-        int maxi = -1e9;
-        vector<vector<string>> ans;
         vector<int> freq(26);
         findFreq(chars, freq);
         vector<string> temp;
-        findMax(0, words, temp, n, freq, score, maxi, ans);
-        // display(ans);
-        return findScore(ans, score);
+        return findMax(0, words, n, freq, score);
+        
     }
 
     void display(vector<vector<string>> &ans)
