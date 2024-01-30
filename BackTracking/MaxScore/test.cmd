@@ -6,12 +6,12 @@ REM Note that you should use double % sign in scripts, and single % sign in comm
 REM For's variables should always be single-letter
 SET FILENAME=MaxScoreOfWord
  g++ %FILENAME%.cpp -o %FILENAME%.exe
-for %%t in (Tests\*.in) do (
+for %%t in (*.in) do (
   REM There are special forms of accessing for's variable, see `for /?`
-  MaxScoreOfWord <%%t >Tests\%%~nt.out || exit /b
+  MaxScoreOfWord <%%t >%%~nt.out || exit /b
   REM a || b means 'run a, if it fails, run b'.
   REM In the next line, if 'fc' (file compare) fails,
   REM then 'exit /b' is called (closes current batch script, but not the command prompt)
-  fc %%~nt.out %%~nt.ans || echo test failed
+  fc %%~nt.out %%~nt.ans || echo test failed for %%~nt
 )
 echo All test passed
