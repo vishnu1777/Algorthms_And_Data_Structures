@@ -5,7 +5,7 @@ REM Type 'for /?' in command prompt for detailed help about for's options
 REM Note that you should use double % sign in scripts, and single % sign in command prompt
 REM For's variables should always be single-letter
 SET FILENAME=solve
-g++ %FILENAME%.cpp -o %FILENAME%.exe
+g++ %FILENAME%.cpp -o %FILENAME%
 for %%t in (*.in) do (
   REM There are special forms of accessing for's variable, see `for /?`
   %FILENAME% <%%t >%%~nt.out || exit /b

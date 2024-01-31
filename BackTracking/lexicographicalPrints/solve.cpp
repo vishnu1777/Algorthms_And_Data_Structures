@@ -7,18 +7,14 @@ class Solution
     void dfs(int num,int n,vector<int>&ans){
         if(num > n )return;
 
-        for(int i=0;i<10;i++){
-            num =( num*10)+i;
-            if(num == 0)continue;
-            else{
-                ans.push_back(num);
-                dfs(num,n,ans);
-            }
-        }
+        ans.push_back(num);
+        dfs(num*10,n,ans);
+        if(num % 10 != 9)dfs(num+1,n,ans);
     }
     vector<int> solve(int n){
         vector<int>ans;
         dfs(1,n,ans);
+        return ans;
     }
 
     void display(auto ans)
@@ -27,7 +23,7 @@ class Solution
         {
             cout << it << " ";
         }
-        cout << endl;
+        cout << '\n';
     }
 };
 
