@@ -17,7 +17,6 @@ public:
         if(idx == n)return 0;
 
         int notTake = findMax(idx+1,words,n,freq,score);
-        vector<int>temp(26);
         bool flag = true;
         int val = 0;
         for(int i=0;i<words[idx].size();i++){

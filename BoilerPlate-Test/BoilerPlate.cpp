@@ -4,7 +4,9 @@ using namespace std;
 class Solution
 {
     public:
-    void solve(){}
+    void solve(){
+
+    }
 
     void display(auto ans)
     {
@@ -23,6 +25,7 @@ int main()
     cin >> tc;
     while (tc--)
     {   
+        
         Solution ob;
     }
     return 0;
